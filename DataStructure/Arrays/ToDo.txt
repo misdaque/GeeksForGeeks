@@ -1,0 +1,9 @@
+1) Data Structure
+  1) Arrays
+    1) Arrays rotation
+      Q.no - 3) Block swap algorithm for array rotation
+      Q.No - 10) Quickly find multiple left rotations of an array
+      Q.No - 13) Find a rotation with maximum hamming distance
+
+    2) Rearrangements
+      Q.no - 3) Rearrange array such that arr[i] >= arr[j] if i is even and arr[i]<=arr[j] if i is odd and j < i --> DONE!
