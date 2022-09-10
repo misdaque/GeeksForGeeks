@@ -10,7 +10,7 @@ class InsertingNodeAtTheLeefInBST{
     root.right.left = new Node(35);
     root.right.right = new Node(50);
 
-    root = null;
+    //root = null;
 
   //  System.out.println("Inserted - " + insertRecursively(null, root, 20));
 
