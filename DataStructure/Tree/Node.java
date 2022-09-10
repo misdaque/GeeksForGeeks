@@ -12,4 +12,14 @@ class Node{
   Node(){
     left = right = null;
   }
+
+  public static void inOrder(Node n){
+
+    if(n == null)
+      return;
+      
+    inOrder(n.left);
+    System.out.print(n.data + " ");
+    inOrder(n.right);
+  }
 }
