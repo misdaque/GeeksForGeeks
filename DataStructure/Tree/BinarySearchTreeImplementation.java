@@ -2,7 +2,7 @@ class BinarySearchTreeImplementation{
   Node root = null;
 
   public void insert(int data){
-    root = insertRec(root, data);
+    root = insertItt(root, data);
   }
 
   public Node insertRec(Node root, int data){
@@ -17,6 +17,52 @@ class BinarySearchTreeImplementation{
       root.left = insertRec(root.left, data);
     else
       root.right = insertRec(root.right, data);
+
+    return root;
+  }
+
+  public Node insertRecRevision(Node root, int data){
+
+    if(root == null){
+      Node node = new Node(data);
+      root = node;
+      return root;
+    }
+
+    if(data < root.data)
+      root.left = insertRecRevision(root.left, data);
+    else if(data > root.data)
+      root.right = insertRecRevision(root.right, data);
+
+    return root;
+  }
+
+  public Node insertItt(Node root, int data){
+    Node node = new Node(data);
+
+    if(root == null)
+      return node;
+
+    Node temp = root;
+    Node prev = null;
+
+    while(temp != null){
+      prev = temp;
+
+      if(data < temp.data)
+        temp = temp.left;
+      else if(data > temp.data)
+        temp = temp.right;
+      else
+        return root;
+    }
+
+    if(temp == null){
+      if(data < prev.data)
+        prev.left = node;
+      else
+        prev.right = node;
+    }
 
     return root;
   }

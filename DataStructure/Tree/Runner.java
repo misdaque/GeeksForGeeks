@@ -9,6 +9,6 @@ class Runner{
     tree.insert(11);
     tree.insert(9);
 
-    tree.descOrder();
+    tree.inOrder();
   }
 }
