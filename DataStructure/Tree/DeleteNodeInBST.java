@@ -1,5 +1,3 @@
-//ToDo: Find out a way to eleminate the node entirely which needs to be delelted
-
 class DeleteNodeInBST{
   public static void main(String[] args) {
     Node root = new Node(30);
@@ -7,7 +5,7 @@ class DeleteNodeInBST{
     root.left = new Node(20);
     root.left.left = new Node(10);
     root.left.right = new Node(25);
-    //root.left.left.left = new Node(7);
+    root.left.right.left = new Node(22);
 
     root.right = new Node(40);
     root.right.left = new Node(35);
@@ -20,59 +18,57 @@ class DeleteNodeInBST{
     System.out.println();
 
     Node.inOrder(root);
+    System.out.println("Root Element is " + root.data);
   }
 
-  private static Node delete(Node n, int key, Node prev){
-
+  private static void delete(Node n, int key, Node prev){
       if(n == null)
-        return null;
+        return ;
 
-      if(n.left == null && n.right == null){
-        if(prev.left != null && prev.left.data == key)
-          prev.left = null;
-        else if(prev.right != null && prev.right.data == key)
-          prev.right = null;
-        //n.data = -1;
-        return null;
-      }
-
-      prev = n;
       if(key < n.data)
-        n = delete(n.left, key, prev);
+        delete(n.left, key, n);
       else if(key > n.data)
-        n = delete(n.right, key, prev);
+        delete(n.right, key, n);
       else{
-        Node temp;
-        if(height(n.left) > height(n.right)){
-          temp = inOrderPre(n.left);
+        if(n.left == null && n.right == null)
+          deleteLeafNode(prev, key);
+
+        else if(height(n.left) > height(n.right)){
+          Node temp = inOrderSucc(n.left);
           n.data = temp.data;
-          delete(temp, temp.data, prev);
+          delete(n.left, temp.data, n);
         }
         else{
-          temp = inOrderSucc(n.right);
+          Node temp = inOrderPred(n.right);
           n.data = temp.data;
-          delete(temp, temp.data, prev);
+          delete(n.right, temp.data, n);
         }
       }
-      return null;
-}
 
-  private static Node inOrderPre(Node n){
+      // return prev;
+  }
 
-    while(n != null && n.right != null){
-      n = n.right;
-    }
-
-    return n;
+  private static void deleteLeafNode(Node prev, int key){
+    if(prev.right != null && key == prev.right.data)
+      prev.right = null;
+    else
+      prev.left = null;
   }
 
   private static Node inOrderSucc(Node n){
 
-    while(n != null && n.left != null){
-      n = n.left;
-    }
+    if(n.right == null)
+      return n;
 
-    return n;
+    return inOrderSucc(n.right);
+  }
+
+  private static Node inOrderPred(Node n){
+
+    if(n.left == null)
+      return n;
+
+    return inOrderPred(n.left);
   }
 
   private static int height(Node n){
@@ -86,4 +82,5 @@ class DeleteNodeInBST{
 
     return x > y ? x + 1 : y + 1;
   }
+
 }
