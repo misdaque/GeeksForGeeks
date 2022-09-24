@@ -16,15 +16,32 @@ class HeapImplementation{
       for(int i : arr)
         System.out.print(i + " ");
 
-      delete(arr, arr.length - 1);
-
       System.out.println();
 
-      System.out.print("Max Heap is: ");
+      System.out.print("Sorted Array is: ");
+
+      heapSort(arr);
 
       for(int i : arr)
         System.out.print(i + " ");
 
+      // delete(arr, arr.length - 1);
+      //
+      // System.out.println();
+      //
+      // System.out.print("Max Heap is: ");
+      //
+      // for(int i : arr)
+      //   System.out.print(i + " ");
+
+  }
+
+  private static void heapSort(int[] arr){
+    for(int i = 1; i < arr.length; i++)
+      maxHeapInsert(arr, i);
+
+    for(int i = arr.length - 1; i >=0; i--)
+      delete(arr, i);
   }
 
   private static void maxHeapInsert(int[] arr, int i){
@@ -62,7 +79,6 @@ class HeapImplementation{
     }
   }
 
-  //TODO: Not working the way expected
   private static void delete(int[] arr, int h){
     int i = 0;
     int deleted = arr[0];
