@@ -8,8 +8,10 @@ class HeapImplementation{
 
       System.out.println();
 
-      for(int i = 1; i < arr.length ; i++)
-        maxHeapInsertRevision(arr, i);
+      // for(int i = 1; i < arr.length ; i++)
+      //   maxHeapInsertRevision(arr, i);
+
+      heapifyInsert(arr);
 
       System.out.print("Max Heap is: ");
 
@@ -76,6 +78,43 @@ class HeapImplementation{
         break;
 
         prev = i;
+    }
+  }
+
+  private static void heapifyInsert(int arr[]){
+    // int i = arr.length - 1;
+    for(int i = arr.length - 1; i >= 0; i--){
+      int lc;
+      int rc;
+      int j = i;
+      int greaterIndex = -1;
+
+      while(true){
+        lc = (j << 1) + 1;
+        rc = lc + 1;
+
+        if(rc < arr.length){
+          greaterIndex = arr[rc] > arr[lc] ? rc : lc;
+        }
+        else if(lc < arr.length){
+          greaterIndex = lc;
+        }
+        else
+          break;
+
+        System.out.println();
+        System.out.println("Greater Index " + greaterIndex);
+
+        if(arr[j] < arr[greaterIndex]){
+          arr[j] = arr[j] ^ arr[greaterIndex];
+          arr[greaterIndex] = arr[j] ^ arr[greaterIndex];
+          arr[j] = arr[j] ^ arr[greaterIndex];
+        } else
+            break;
+
+          j = greaterIndex;
+          greaterIndex = -1;
+      }
     }
   }
 
