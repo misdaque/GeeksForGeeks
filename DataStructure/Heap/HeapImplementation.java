@@ -83,7 +83,10 @@ class HeapImplementation{
 
   private static void heapifyInsert(int arr[]){
     // int i = arr.length - 1;
-    for(int i = arr.length - 1; i >= 0; i--){
+
+    int i = arr.length / 2 - 1;
+
+    for(; i >= 0; i--){
       int lc;
       int rc;
       int j = i;
